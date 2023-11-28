@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from .models import Menu, User, Pizza, Topping,PromoCode, Review, Order
+from django.shortcuts import render, get_object_or_404
+from .models import Menu, User, Pizza, Topping,PromoCode, Review, Order, Address, Category
 # Create your views here.
 
 
@@ -28,9 +28,27 @@ def menu(request, pk):
     return render(request, 'blog/menu.html', context)
 
 
+#def user_detail(request, user_id):
+ #   user = User.objects.get(id=user_id)
+  #  return render(request, 'user_detail.html', {'user': user})
+
 def user_detail(request, user_id):
-    user = User.objects.get(id=user_id)
-    return render(request, 'user_detail.html', {'user': user})
+    user = get_object_or_404(User, id=user_id)
+
+    if request.method == 'POST':
+        form = Address(request.POST)
+        if form.is_valid():
+            # Save the address
+            address = form.cleaned_data['delivery_address']
+            user.delivery_address = address
+            user.save()
+            # Redirect or add success message
+
+    else:
+        form = Address(initial={'delivery_address': user.delivery_address})
+
+    context = {'user': user, 'form': form}
+    return render(request, 'user_detail.html', context)
 
 def pizza_detail(request, pizza_id):
     pizza = Pizza.objects.get(id=pizza_id)
@@ -52,3 +70,4 @@ def review_detail(request, review_id):
 def order_item_detail(request, order_item_id):
     order_item = Order.objects.get(id=order_item_id)
     return render(request, 'order_item_detail.html', {'order_item': order_item})
+
