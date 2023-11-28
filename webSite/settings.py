@@ -121,9 +121,17 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'static'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+#collects static files, this is curicial for the communication of the files existing 
+#under the collection of static which are the compnonets of the css styles 
+
+STATICFILES_DIRS = [
+    BASE_DIR / 'blog/static',
+]

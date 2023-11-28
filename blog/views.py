@@ -32,13 +32,13 @@ def menu(request, pk):
  #   user = User.objects.get(id=user_id)
   #  return render(request, 'user_detail.html', {'user': user})
 
+
 def user_detail(request, user_id):
     user = get_object_or_404(User, id=user_id)
 
     if request.method == 'POST':
         form = Address(request.POST)
         if form.is_valid():
-            # Save the address
             address = form.cleaned_data['delivery_address']
             user.delivery_address = address
             user.save()
