@@ -19,6 +19,14 @@ class User(models.Model):
         return self.user.username
     # ...
 
+class Cart(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    pizza = models.ForeignKey('Pizza', on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Cart #{self.pk} - User: {self.user.username}, Pizza: {self.pizza.name}, Quantity: {self.quantity}"
 #menu for specified item 
 class Menu(models.Model):
     name = models.CharField(max_length=200)
@@ -35,6 +43,15 @@ class Pizza(models.Model):
     price = models.DecimalField(max_digits=6, decimal_places=2)
    
     # ...
+
+class Cart(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    pizza = models.ForeignKey(Pizza, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Cart #{self.pk} - User: {self.user.username}, Pizza: {self.pizza.name}, Quantity: {self.quantity}"
 
 class Order(models.Model):
     customer = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)

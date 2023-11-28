@@ -1,5 +1,5 @@
-from django.shortcuts import render, get_object_or_404
-from .models import Menu, User, Pizza, Topping,PromoCode, Review, Order, Address, Category
+from django.shortcuts import render, get_object_or_404, redirect
+from .models import Menu, Cart, User, Pizza, Topping,PromoCode, Review, Order, Address, Category
 # Create your views here.
 
 
@@ -53,6 +53,44 @@ def user_detail(request, user_id):
 def pizza_detail(request, pizza_id):
     pizza = Pizza.objects.get(id=pizza_id)
     return render(request, 'pizza_detail.html', {'pizza': pizza})
+
+def add_to_cart(request, pizza_id):
+    # Retrieve the pizza object based on the provided pizza_id
+    pizza = Pizza.objects.get(pk=pizza_id)
+
+    # Check if the user is authenticated
+    if request.user.is_authenticated:
+        # Get the user's cart or create a new one if it doesn't exist
+        cart, created = Cart.objects.get_or_create(user=request.user, pizza=pizza)
+
+        # Increment the quantity if the pizza is already in the cart
+        if not created:
+            cart.quantity += 1
+            cart.save()
+
+        # Redirect the user to the cart page or any other desired page
+        return redirect('cart')
+    else:
+        # Handle the case for anonymous/guest users
+        # You can implement different logic based on your requirements
+        # For example, you can use session variables to store the cart items
+        return redirect('login')  # Redirect to the login page
+
+def view_cart(request):
+    # Retrieve all cart items for the current user
+    cart_items = Cart.objects.all()
+    if request.user.is_authenticated:
+        # Retrieve cart items for the logged-in user
+        cart_items = Cart.objects.filter(user_id=request.user.id)
+    else:
+        # Retrieve cart items for the guest user (using session-based approach)
+        cart_items = Cart.objects.filter(session_id=request.session.session_key)
+
+    context = {
+        'cart_items': cart_items
+    }
+
+    return render(request, 'blog/cart.html', context)
 
 
 def topping_detail(request, topping_id):

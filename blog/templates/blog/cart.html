@@ -1,0 +1,23 @@
+{% extends 'main.html' %}
+
+{% block styles %}
+  <link rel="stylesheet" href="cart.css">
+{% endblock %}
+
+{% block content %}
+  <div class="cart-container">
+    <h1>Cart</h1>
+    {% if cart_items %}
+      <ul>
+        {% for cart_item in cart_items %}
+          <li class="cart-item">
+            <span class="pizza-name">{{ cart_item.pizza.name }}</span>
+            <span class="quantity">Quantity: {{ cart_item.quantity }}</span>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="empty-cart">Your cart is empty.</p>
+    {% endif %}
+  </div>
+{% endblock %}
