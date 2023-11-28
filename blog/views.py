@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Menu, User, Pizza, Topping
+from .models import Menu, User, Pizza, Topping,PromoCode, Review, Order
 # Create your views here.
 
 
@@ -40,3 +40,15 @@ def pizza_detail(request, pizza_id):
 def topping_detail(request, topping_id):
     topping = Topping.objects.get(id=topping_id)
     return render(request, 'topping_detail.html', {'topping': topping})
+
+def promo_code_detail(request, promo_code_id):
+    promo_code = PromoCode.objects.get(id=promo_code_id)
+    return render(request, 'promo_code_detail.html', {'promo_code': promo_code})
+
+def review_detail(request, review_id):
+    review = Review.objects.get(id=review_id)
+    return render(request, 'review_detail.html', {'review': review})
+
+def order_item_detail(request, order_item_id):
+    order_item = Order.objects.get(id=order_item_id)
+    return render(request, 'order_item_detail.html', {'order_item': order_item})
