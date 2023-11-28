@@ -1,0 +1,18 @@
+/* blog/static/css/style.css */
+
+/* Navigation Bar */
+.navbar {
+    background-color: #f8f9fa; /* Set your desired background color */
+    color: #000; /* Set your desired text color */
+}
+.navbar-brand {
+    font-weight: bold;
+}
+.navbar-nav .nav-link {
+    color: #000; /* Set your desired link color */
+}
+
+/* Content */
+.content {
+    margin: 20px; /* Adjust the margin as per your requirements */
+}
