@@ -135,3 +135,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'blog/static')
 ]
+
+#media root 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'pizza_images')
+MEDIA_URL = '/media/'

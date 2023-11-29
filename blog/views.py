@@ -1,8 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Menu, Cart, User, Pizza, Topping,PromoCode, Review, Order, Address, Category
 import logging
-from django.contrib.auth.models import login
 from django.http import JsonResponse
+from django.contrib import messages
 # Create your views here.
 
 
@@ -25,10 +25,22 @@ def home(request):
     context = {'menus': menus}
     return render(request, 'blog/home.html', context)
 
-def menu(request, pk):
-    menu = Menu.objects.get(id=pk)
+
+def menu(request, name):
+    menu = Menu.objects.get(name=name)
     context = {'menu': menu}
     return render(request, 'blog/menu.html', context)
+
+def menu_item(request, pk=None):
+    if pk is not None:
+        menu_item = Menu.objects.get(id=pk)
+    else:
+        menu_item = Menu.objects.filter(is_default=True).first()
+    menu = Menu.objects.all()
+
+    context = {'menu_item': menu_item, 'menu': menu}
+    return render(request, 'blog/menu_item.html', context)
+
 
 
 #def user_detail(request, user_id):
@@ -112,22 +124,32 @@ def order_item_detail(request, order_item_id):
     order_item = Order.objects.get(id=order_item_id)
     return render(request, 'order_item_detail.html', {'order_item': order_item})
 
+
 def register(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
         email = request.POST['email']
 
+        # Perform validation on the input data
+        if User.objects.filter(username=username).exists():
+            messages.error(request, 'Username is already taken.')
+            return redirect('register')
+
+        if User.objects.filter(email=email).exists():
+            messages.error(request, 'Email address is already registered.')
+            return redirect('register')
+
         # Create a new User object
         user = User.objects.create_user(username=username, password=password, email=email)
 
-        # Log in the user
-        login(request, user)
+        # Optionally, you can perform additional actions like sending a confirmation email to the user
 
-        # Redirect to a success page or any other desired page
-        return redirect('user')
+        messages.success(request, 'Registration successful. You can now log in.')
+        return redirect('login')
     
     return render(request, 'register.html')
+
 
 def log_incorrect_login_attempt(request):
     if request.method == 'POST':
