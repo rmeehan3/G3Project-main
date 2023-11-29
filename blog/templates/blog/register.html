@@ -1,0 +1,50 @@
+{% extends 'main.html' %}
+
+
+{% block content %}
+<div class="dropdown-menu">
+    {% if form.errors %}
+      <div class="alert alert-danger">
+        Incorrect password. Please try again.
+      </div>
+    {% endif %}
+    <body>
+        <section class="container">
+            <div class="login-container">
+                <div class="circle circle-one"></div>
+                <div class="form-container">
+                    <img src="https://raw.githubusercontent.com/hicodersofficial/glassmorphism-login-form/master/assets/illustration.png" alt="illustration" class="illustration" />
+                    <h1 class="opacity">LOGIN</h1>
+                    <form>
+                        <input type="text" placeholder="USERNAME" />
+                        <input type="password" placeholder="PASSWORD" />
+                        <button class="opacity">SUBMIT</button>
+                    </form>
+                    <div class="register-forget opacity">
+                        <a href="">REGISTER</a>
+                        <a href="">FORGOT PASSWORD</a>
+                    </div>
+                </div>
+                <div class="circle circle-two"></div>
+            </div>
+            <div class="theme-btn-container"></div>
+        </section>
+    </body>
+</div>
+
+{% endblock %}
+
+{% block script %}
+<script>
+// JavaScript code to make an AJAX request to log the incorrect login attempt on the server-side
+fetch('/log_incorrect_login_attempt/', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': '{{ csrf_token }}'
+    },
+    body: JSON.stringify({message: 'Incorrect login attempt'}),
+})
+.catch(error => console.error('Error logging incorrect login attempt:', error));
+</script>
+{% endblock %}

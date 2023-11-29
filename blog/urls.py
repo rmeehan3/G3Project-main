@@ -11,6 +11,7 @@ urlpatterns = [
     path('cart/add/<int:pizza_id>/', views.add_to_cart, name='add_to_cart'),
     path('cart/', views.view_cart, name='view_cart'),
     path('promo-codes/<int:promo_code_id>/', views.promo_code_detail, name='promo_code_detail'),
+    path('register/', views.register, name='register'),
 ]
 
 

@@ -2,8 +2,18 @@
 
 {% block content %}
 
-<h1>
-    {{menu.name}}
-</h1>
+<h1> Menu </h1>
 
-{% endblock %}
+<div>
+
+    <div>
+        {% for menu in menus %}
+        <div>
+            <h5>{{menu.id}} -- <a href="{% url 'menu' menu.id %}">{{menu.name}}</a></h5>
+        </div>
+        {% endfor %}
+    </div>
+   
+</div>
+
+{% endblock content %}

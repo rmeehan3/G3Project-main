@@ -27,6 +27,8 @@ class Cart(models.Model):
 
     def __str__(self):
         return f"Cart #{self.pk} - User: {self.user.username}, Pizza: {self.pizza.name}, Quantity: {self.quantity}"
+    
+    
 #menu for specified item 
 class Menu(models.Model):
     name = models.CharField(max_length=200)
@@ -88,6 +90,22 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class PasswordResetToken(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    token = models.CharField(max_length=100, unique=True)
+    created_at = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f"Token: {self.token} - User: {self.user.username}"
+
+class ErrorLog(models.Model):
+    timestamp = models.DateTimeField(default=timezone.now)
+    message = models.TextField()
+
+    def __str__(self):
+        return f"Error Log: {self.timestamp}"
 
 class Address(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

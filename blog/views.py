@@ -1,5 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Menu, Cart, User, Pizza, Topping,PromoCode, Review, Order, Address, Category
+import logging
+from django.contrib.auth.models import login
+from django.http import JsonResponse
 # Create your views here.
 
 
@@ -109,3 +112,27 @@ def order_item_detail(request, order_item_id):
     order_item = Order.objects.get(id=order_item_id)
     return render(request, 'order_item_detail.html', {'order_item': order_item})
 
+def register(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        email = request.POST['email']
+
+        # Create a new User object
+        user = User.objects.create_user(username=username, password=password, email=email)
+
+        # Log in the user
+        login(request, user)
+
+        # Redirect to a success page or any other desired page
+        return redirect('user')
+    
+    return render(request, 'register.html')
+
+def log_incorrect_login_attempt(request):
+    if request.method == 'POST':
+        message = request.POST.get('message')
+        logging.error(message)
+        return JsonResponse({'status': 'success'})
+    else:
+        return JsonResponse({'status': 'error', 'message': 'Invalid request method'})

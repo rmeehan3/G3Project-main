@@ -1,18 +1,32 @@
-/* blog/static/css/style.css */
+/* styles.css */
 
-/* Navigation Bar */
+/* Set the background color of the navbar to yellow */
 .navbar {
-    background-color: #f8f9fa; /* Set your desired background color */
-    color: #000; /* Set your desired text color */
-}
-.navbar-brand {
+    background-color: yellow;
+  }
+  
+  /* Style the logo */
+  .navbar-brand img {
+    height: 50px; /* Adjust the height as needed */
+  }
+  
+  /* Style the menu, order, and profile links */
+  .navbar-nav .nav-link {
+    color: black; /* Set the link color */
     font-weight: bold;
-}
-.navbar-nav .nav-link {
-    color: #000; /* Set your desired link color */
-}
-
-/* Content */
-.content {
-    margin: 20px; /* Adjust the margin as per your requirements */
-}
+    margin-right: 10px; /* Adjust the margin as needed */
+  }
+  
+  /* Style the dropdown menu */
+  .dropdown-menu {
+    background-color: yellow; /* Set the background color */
+  }
+  
+  .dropdown-item {
+    color: black; /* Set the dropdown item text color */
+  }
+  
+  .dropdown-item:hover,
+  .dropdown-item:focus {
+    background-color: #ffcc00; /* Set the background color when hovering/focusing */
+  }

@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
-from pathlib import Path
+from pathlib import Path, os 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -133,5 +133,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #under the collection of static which are the compnonets of the css styles 
 
 STATICFILES_DIRS = [
-    BASE_DIR / 'blog/static',
+    os.path.join(BASE_DIR, 'blog/static')
 ]
