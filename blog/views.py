@@ -63,11 +63,11 @@ def user_detail(request, user_id):
         form = Address(initial={'delivery_address': user.delivery_address})
 
     context = {'user': user, 'form': form}
-    return render(request, 'user_detail.html', context)
+    return render(request, 'blog/user_detail.html', context)
 
 def pizza_detail(request, pizza_id):
     pizza = Pizza.objects.get(id=pizza_id)
-    return render(request, 'pizza_detail.html', {'pizza': pizza})
+    return render(request, 'blog/pizza_detail.html', {'pizza': pizza})
 
 def add_to_cart(request, pizza_id):
     # Retrieve the pizza object based on the provided pizza_id
@@ -110,19 +110,19 @@ def view_cart(request):
 
 def topping_detail(request, topping_id):
     topping = Topping.objects.get(id=topping_id)
-    return render(request, 'topping_detail.html', {'topping': topping})
+    return render(request, 'blog/topping_detail.html', {'topping': topping})
 
 def promo_code_detail(request, promo_code_id):
     promo_code = PromoCode.objects.get(id=promo_code_id)
-    return render(request, 'promo_code_detail.html', {'promo_code': promo_code})
+    return render(request, 'blog/promo_code_detail.html', {'promo_code': promo_code})
 
 def review_detail(request, review_id):
     review = Review.objects.get(id=review_id)
-    return render(request, 'review_detail.html', {'review': review})
+    return render(request, 'blog/review_detail.html', {'review': review})
 
 def order_item_detail(request, order_item_id):
     order_item = Order.objects.get(id=order_item_id)
-    return render(request, 'order_item_detail.html', {'order_item': order_item})
+    return render(request, 'blog/order_item_detail.html', {'order_item': order_item})
 
 
 def register(request):
@@ -148,7 +148,7 @@ def register(request):
         messages.success(request, 'Registration successful. You can now log in.')
         return redirect('login')
     
-    return render(request, 'register.html')
+    return render(request, 'blog/register.html')
 
 
 def log_incorrect_login_attempt(request):

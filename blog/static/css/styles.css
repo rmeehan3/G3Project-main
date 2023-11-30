@@ -1,0 +1,32 @@
+/* styles.css */
+
+/* Set the background color of the navbar to yellow */
+.navbar {
+    background-color: yellow;
+  }
+  
+  /* Style the logo */
+  .navbar-brand img {
+    height: 50px; /* Adjust the height as needed */
+  }
+  
+  /* Style the menu, order, and profile links */
+  .navbar-nav .nav-link {
+    color: black; /* Set the link color */
+    font-weight: bold;
+    margin-right: 10px; /* Adjust the margin as needed */
+  }
+  
+  /* Style the dropdown menu */
+  .dropdown-menu {
+    background-color: yellow; /* Set the background color */
+  }
+  
+  .dropdown-item {
+    color: black; /* Set the dropdown item text color */
+  }
+  
+  .dropdown-item:hover,
+  .dropdown-item:focus {
+    background-color: #ffcc00; /* Set the background color when hovering/focusing */
+  }

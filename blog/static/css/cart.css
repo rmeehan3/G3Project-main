@@ -1,0 +1,23 @@
+/* styles.css */
+
+.cart-container {
+    margin: 20px;
+    padding: 10px;
+    background-color: #f0f0f0;
+  }
+  
+  .cart-item {
+    margin-bottom: 10px;
+  }
+  
+  .cart-item .pizza-name {
+    font-weight: bold;
+  }
+  
+  .cart-item .quantity {
+    color: #888888;
+  }
+  
+  .empty-cart {
+    color: #888888;
+  }
