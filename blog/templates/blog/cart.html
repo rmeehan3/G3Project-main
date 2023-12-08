@@ -1,27 +1,42 @@
-{% extends 'main.html' %}
-
-{% load static %} 
-
-{% block styles %}
-
-  <link rel="stylesheet" href="{% static 'static/css/cart.css' %}">
-
-{% endblock %}
-
-{% block content %}
-  <div class="cart-container">
-    <h1>Cart</h1>
-    {% if cart_items %}
-      <ul>
-        {% for cart_item in cart_items %}
-          <li class="cart-item">
-            <span class="pizza-name">{{ cart_item.pizza.name }}</span>
-            <span class="quantity">Quantity: {{ cart_item.quantity }}</span>
-          </li>
-        {% endfor %}
-      </ul>
-    {% else %}
-      <p class="empty-cart">Your cart is empty.</p>
-    {% endif %}
-  </div>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Unna&display=swap" rel="stylesheet">
+    <title>Group 3 Pizza Checkout</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <img src="group3pizzalogo.png" alt="Logo">
+            <ul class="nav-list">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="orders.html">Orders</a></li>
+                <li><a href="cart.html">Cart</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+    <div class="cart-container">
+        <h1>Your Cart</h1>
+    <div class="spacing">
+        <div class="cart-top-container">
+            <h1>Order Name</h1>
+            <h1>Order Type</h1>
+            <h1>Payment Method</h1>
+        </div>
+            <p>Time</p>
+        <div class="cart-bottom-container">
+            <h1>Items</h1>
+            <h1>Order Ready In:</h1>
+        </div>
+    </div>
+</div>
+    </main>
+</body>
+</html>
